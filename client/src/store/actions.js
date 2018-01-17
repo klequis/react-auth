@@ -3,10 +3,18 @@ import { log } from '../lib/ke-utils'
 
 export const updateRegisteredUser = (user) => {
   log('actions.updateRegisteredUser: user', user, 'orange')
+  return ({
+    type: 'none',
+    payload: 'none'
+  })
 }
 
 export const updateSignedInUser = (user) => {
   log('actions.updateSignedInUser: user', user, 'orange')
+  return ({
+    type: 'none',
+    payload: 'none'
+  })
 }
 
 /*
@@ -58,7 +66,13 @@ export const requestRegisterUser = createRequestThunk({
 
 export const requestSignin = createRequestThunk({
   request: api.users.signin,
-  key: 'api/signinUser',
+  key: 'api/signin',
+  success: [ updateSignedInUser ],
+  failure:  [ updateSignedInUser ],
+})
+export const requestLogout = createRequestThunk({
+  request: api.users.logout,
+  key: 'api/logout',
   success: [ updateSignedInUser ],
   failure:  [ updateSignedInUser ],
 })

@@ -4,6 +4,7 @@ import './home.css';
 import Signin from './Signin'
 import Protected from './Protected'
 import Register from './Register'
+import ApiTest from './ApiTest'
 
 class Home extends Component {
   render() {
@@ -22,7 +23,7 @@ class Home extends Component {
           <Route path='/register' component={Register} />
           <Route path='/signin' component={Signin} />
           <Route path='/protected' component={Protected} />
-
+          <ApiTest />
         </div>
       </Router>
     );

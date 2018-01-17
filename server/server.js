@@ -1,13 +1,16 @@
 import SourceMapSupport from 'source-map-support';
 SourceMapSupport.install();
-import express from 'express'
 import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
+import express from 'express'
+import logger from 'morgan'
 import path from 'path'
+
 import { db } from './db'
-// import member from './routes/members'
-import members from './routes/members'
-import schedule from './routes/schedule'
+import index from './routes/index'
+// import passport form './passport'
 import users from './routes/users'
+
 require('dotenv').config()
 
 const app = express()
@@ -18,12 +21,13 @@ global.connectionConfig = {
     password : process.env.DB_PASS,
     database : process.env.DB_NAME,
 }
-
+app.use(logger('dev'))
+app.use(bodyParser.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
+app.use(cookieParser())
 // app.use('/route01', route01)
-app.use('/members', members)
-app.use('/schedule', schedule)
+app.use('/', index)
 app.use('/users', users)
 app.set('port', (process.env.PORT || 3001))
 app.listen(app.get('port'), () => {
