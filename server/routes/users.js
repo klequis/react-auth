@@ -1,13 +1,16 @@
 import express from 'express'
 const router = express.Router();
 
-// router.get('/', (req, res, next) => {
-//   res.send({
-//     "route": "get('/')",
-//     "result": "good",
-//   })
-// });
 router.get('/register', (req, res) => {
+  
+  /* final code needs mod
+  const username = req.body.username;
+  const password = req.body.password;
+  bcrypt.hash(password, 10).then((hash) => {
+    console.log('** hash **', hash)
+    connection.query("INSERT INTO tbl_users SET ?", {username: username, password: hash, full_Name: username})
+  })
+  */
   res.send({
     "route": "get('/register')",
     "result": "good",
