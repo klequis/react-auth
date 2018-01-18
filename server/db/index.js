@@ -1,11 +1,17 @@
-import mysql from 'mysql';
-const connection   = mysql.createConnection({
-  supportBigNumbers: true,
-  bigNumberStrings: true,
-  host     : "localhost",
-  user     : "root",
-  password : "karl",
-  database : "db_users"
-});
+import mysql from 'promise-mysql'
+require('dotenv').config()
 
-module.exports = connection;
+export const connectionConfig = {
+  host     : process.env.DB_HOST,
+  user     : process.env.DB_USER,
+  password : process.env.DB_PASS,
+  database : process.env.DB_NAME,
+}
+
+export const db = () => {
+  return mysql.createConnection(connectionConfig).then((conn) => {
+    return conn
+  })
+}
+
+export default { db }

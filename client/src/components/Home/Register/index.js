@@ -8,31 +8,53 @@ class Register extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        username: '',
-        pwd: '',
-        confirmpwd: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      pwd: '',
+      confirmpwd: '',
     }
   }
   handleChange = (e) => {
     console.log('change')
+    console.log(e.target.value)
     this.setState({
       [e.target.name]: e.target.value
     })
   }
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.requestRegisterUser({ username: this.state.username, password: this.state.pwd })
+    this.props.requestRegisterUser({
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      password: this.state.pwd,
+    })
   }
   render() {
     return (
       <div>
         <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor='username'>Username: </label>
+          <label htmlFor='firstName'>First name: </label>
           <input
             type='text'
-            name='username'
-            value={this.state.username}
+            name='firstName'
+            value={this.state.firstName}
+            onChange={this.handleChange}
+          />
+          <label htmlFor='lastName'>Last name: </label>
+          <input
+            type='text'
+            name='lastName'
+            value={this.state.lastName}
+            onChange={this.handleChange}
+          />
+          <label htmlFor='email'>Email: </label>
+          <input
+            type='text'
+            name='email'
+            value={this.state.email}
             onChange={this.handleChange}
           />
           <label htmlFor='password'>Password: </label>
